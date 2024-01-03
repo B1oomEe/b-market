@@ -1,0 +1,72 @@
+{
+	"Retail Trade": [
+		"Grocery Stores",
+		"Clothing and Footwear",
+		"Electronics and Appliances",
+		"Cosmetics and Perfumes",
+		"Automotive Parts and Accessories"
+	],
+	"Food Service": [
+		"Restaurants",
+		"Cafes",
+		"Bars and Nightclubs",
+		"Fast Food",
+		"Catering Services"
+	],
+	"Manufacturing": [
+		"Food Industry",
+		"Machinery and Engineering",
+		"Chemical Industry",
+		"Electronics and Microelectronics",
+		"Wood Processing Industry"
+	],
+	"Franchising": [
+		"Restaurant Chains",
+		"Stores and Retail Franchises",
+		"Fitness Centers",
+		"Educational Franchises",
+		"Medical Franchises"
+	],
+	"Technology and Startups": [
+		"Software Development",
+		"Internet Technologies and E-Commerce",
+		"Medical and Biotechnology Startups",
+		"Energy Technologies",
+		"Artificial Intelligence and Machine Learning"
+	],
+	"Financial Services": [
+		"Banks and Financial Institutions",
+		"Insurance Companies",
+		"Investment Funds",
+		"Financial Consultations",
+		"Tax and Legal Services"
+	],
+	"Real Estate": [
+		"Commercial Real Estate",
+		"Hotels and Motels",
+		"Apartments and Residential Complexes",
+		"Shopping Centers",
+		"Manufacturing Facilities"
+	],
+	"Services and Consulting": [
+		"Legal Services",
+		"Marketing and Advertising Agencies",
+		"Engineering and Architectural Consultations",
+		"Information Technologies",
+		"Educational Services"
+	],
+	"Healthcare": [
+		"Medical Clinics",
+		"Dental Clinics",
+		"Pharmaceutical Companies",
+		"Medical Equipment",
+		"Laboratories and Diagnostic Centers"
+	],
+	"Agriculture and Agribusiness": [
+		"Crop Farming",
+		"Livestock Farming",
+		"Agrotourism",
+		"Agricultural Machinery Production",
+		"Logging and Wood Processing"
+	]
+}

@@ -1,0 +1,65 @@
+/* Reset some default styles to ensure consistent rendering */
+body, h2 {
+    margin: 0;
+    padding: 0;
+}
+
+/* Center the form vertically and horizontally */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 30%;
+    padding: 25px;
+    text-align: center;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Style the form elements */
+.form-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    margin: 5px 0;
+    color: #555;
+}
+
+.form-control {
+    width: 97%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin: 5px 0;
+}
+
+/* Style the submit button */
+input[type="submit"] {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}

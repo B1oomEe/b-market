@@ -1,0 +1,35 @@
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %}B-market{% endblock %}</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+	{% block head %}{% endblock %}
+</head>
+<body>
+	<header>
+		
+		<a href="{{ url_for('cardController.newCardPage') }}">
+			<i class="gg-add-r"></i>
+		</a>
+		
+		<div class="profile-icon" id="profile-icon">
+			
+			<div class="profile-menu" id="profile-menu">
+				<ul>
+					<li><a href="{{ url_for('essentialController.homePage') }}">Home</a></li>
+					<li><a href="{{ url_for('userController.mycardsPage') }}">My Cards</a></li>
+					<li><a href="{{ url_for('userController.likedPage') }}">Liked</a></li>
+					<li><a href="{{ url_for('userController.settingsPage') }}">Settings</a></li>
+					<li><a href="{{ url_for('userController.chatsPage') }}">Chats</a></li>
+					<li><a href="{{ url_for('userController.logOutPage') }}">Log Out</a></li>
+				</ul>
+			</div>
+		</div>
+	</header>
+	{% block content %}Content block{% endblock %}
+	<script src="{{ url_for('static', filename='js/layoutProfileAnimation.js') }}"></script>
+</body>
+</html>

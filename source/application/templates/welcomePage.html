@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/welcomePage.css') }}">
+	<title>Welcome to B-market</title>
+</head>
+<body>
+	<div class="container">
+		<h1 class="animated">Welcome to B-market</h1>
+		<p class="animated">The best platform for selling businesses.</p>
+		<button class="animated" id="login">
+			<a href="{{ url_for('authController.registrationPage') }}">
+				Register
+			</a>
+		</button>
+		<button class="animated" id="register">
+			<a href="{{ url_for('authController.loginPage') }}">
+				Login
+			</a>
+		</button>
+	</div>
+	<script src="{{ url_for('static', filename='js/welcomePage.js') }}"></script>
+</body>
+</html>

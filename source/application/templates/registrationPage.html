@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Registration Form</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/registrationPage.css') }}">
+</head>
+<body>
+	<div class="container">
+		<h2>Registration</h2>
+		<form action="/auth/registration" method="post">
+
+			{{ form.csrf_token }}
+			
+			<div class="form-group">
+				{{ form.username.label(class="form-label") }}
+				{{ form.username(class="form-control") }}
+			</div>
+
+			<div class="form-group">
+				{{ form.email.label(class="form-label") }}
+				{{ form.email(class="form-control") }}
+			</div>
+
+			<div class="form-group">
+				{{ form.contact_email.label(class="form-label") }}
+				{{ form.contact_email(class="form-control") }}
+			</div>
+
+			<div class="form-group">
+				{{ form.password.label(class="form-label") }}
+				{{ form.password(class="form-control") }}
+			</div>
+
+			<div class="form-group">
+				{{ form.confirm_password.label(class="form-label") }}
+				{{ form.confirm_password(class="form-control") }}
+			</div>
+
+			{{ form.submit(class="btn btn-primary") | safe}}
+			<div id="error">{% if error %} {{ error }} {% endif %}</div>
+		</form>
+		<div class="linkToLogin">
+			Alredy have account? <a href="{{ url_for('authController.loginPage') }}">Log in</a>
+		</div>
+	</div>
+</body>
+</html>
