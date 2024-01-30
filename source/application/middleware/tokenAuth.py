@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import request, jsonify
+from flask import request, jsonify, session
 import jwt
 from datetime import datetime, timedelta
 
@@ -17,7 +17,7 @@ class JWTAuth():
 	def tokenRequired(self, function):
 		@wraps(function)
 		def decorated(*args, **kwargs):
-			token = request.cookies.get('token')
+			token = session.get('token')
 			if not token:
 				return jsonify({
 					"message": "token is missing",

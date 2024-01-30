@@ -10,16 +10,20 @@
 
 {% block content %}
 
+<div class="loading-overlay">
+	<div class="loading-spinner"></div>
+</div>
+
 <div class="container">
-    <h1 class="header-title">Welcome to the Home page!</h1>
-    <p class="container-comment">Here you can find information about selling businesses</p>
+	<h1 class="header-title">Welcome to the Home page!</h1>
+	<p class="container-comment">Here you can find information about selling businesses</p>
 </div>
 
 <div class="card-grid">
-	
 	{% for card in cards %}
 		<div class="card">
 			<img src="https://www.advgazeta.ru/upload/iblock/c6a/10_osnovnykh_prav_potrebiteley_1.jpg" alt="Product Image">
+			<p id="cid" style="display: none;"></p>
 			<h3>{{ card.name }}</h3>
 			<p>{{ card.description }}</p>
 			<p class="price">${{ card.price_usd }}</p>
@@ -27,10 +31,43 @@
 			<p class="category">Category: {{ card.category }}</p>
 			<p class="target">Target: {{ card.target }}</p>
 			<p class="likes">Bookmarks: {{ card.bookmarks_count }}</p>
-			<button>Add to Cart</button>
+			<button class="executeButton" data-argument="{{ card.cid }}">Get more info</button>
 		</div>
 	{% endfor %}
 </div>
+
+<script>
+	$(document).ready(function(){
+		$(".executeButton").click(function(){
+			showLoadingOverlay(); // Показать индикатор загрузки
+		
+			var argumentValue = $(this).data('argument');
+			var csrfToken = "{{ csrf_token() }}";
+		
+			$.ajax({
+				type: 'POST',
+				url: '/getEmailInfo',
+				data: {argument: argumentValue, csrf_token: csrfToken},
+				success: function(response){
+					hideLoadingOverlay(); // Скрыть индикатор загрузки
+					alert('Message sended');
+				},
+				error: function(error){
+					hideLoadingOverlay(); // Скрыть индикатор загрузки
+					alert('Error occured: ' + error.responseText);
+				}
+			});
+		});
+	
+		function showLoadingOverlay() {
+			$(".loading-overlay").show();
+		}
+	
+		function hideLoadingOverlay() {
+			$(".loading-overlay").hide();
+		}
+	});
+</script>
 
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 

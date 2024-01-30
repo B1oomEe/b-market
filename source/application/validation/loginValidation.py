@@ -5,14 +5,8 @@ from wtforms.validators import InputRequired, Email, Length
 
 
 class LoginForm(FlaskForm):
-	email = EmailField('Email', validators=[
-		InputRequired(), 
-		# Email()
-	])
-	password = PasswordField('Password', validators=[
-		InputRequired(), 
-		# Length(min=6, max=32, message="Password must be at least 6 characters long and no more than 32")
-	])
+	email = EmailField('Email')
+	password = PasswordField('Password')
 	rememberMe = BooleanField('Remember Me')
 	submit = SubmitField('Log In')
 

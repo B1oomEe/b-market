@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, TextAreaField, FileField
+from wtforms import StringField, SelectField, TextAreaField, FileField, BooleanField
 
 
 class NewCardForm(FlaskForm):
@@ -78,6 +78,7 @@ class NewCardForm(FlaskForm):
 	description = TextAreaField('Description')
 	price = StringField('Price')
 	photos = FileField('Photos')
+	waitForInvest = BooleanField('Looking for investments?')
 
 class CardFormValidator():
 	def __init__(self, title: str, category: str, purpose: str, stage: str, description: str, price: str, photos: str):
@@ -88,7 +89,6 @@ class CardFormValidator():
 		self.description = description
 		self.price = price
 		self.photos = photos
-		
 
 		self.categories = [
 		    'Grocery Stores',
@@ -237,7 +237,6 @@ class CardFormValidator():
 				"error": True,
 				"field": "price"
 			}
-		print(self.price)
 		for char in str(self.price):
 			if not char.isdigit():
 				return {

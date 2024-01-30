@@ -223,7 +223,7 @@ class PostgresDatabase():
 			try:
 				random_cards = (
 					session.query(Card)
-					.order_by(func.random())  # Используем func.func.random() вместо func.random()
+					.order_by(func.random())
 					.limit(20)
 					.all()
 				)
@@ -244,7 +244,35 @@ class PostgresDatabase():
 					"error": True,
 					"errorLog": str(error)
 				}
-
+		
+	def getCardsByRandomWithTarget(self, target: str) -> list | dict | None:
+		with self.Session() as session:
+			try:
+				random_cards = (
+					session.query(Card)
+					.filter_by(target=target)
+					.order_by(func.random())
+					.limit(20)
+					.all()
+				)
+	
+				if random_cards:
+					return random_cards
+	
+			except SQLAlchemyError as error:
+				return {
+					"message": "Internal database error",
+					"error": True,
+					"errorLog": str(error)
+				}
+	
+			except Exception as error:
+				return {
+					"message": "Data validation fail",
+					"error": True,
+					"errorLog": str(error)
+				}
+	
 	def updateCardPrice(self, cid: str, price: int) -> dict | None:
 		with self.Session() as session:
 			try:

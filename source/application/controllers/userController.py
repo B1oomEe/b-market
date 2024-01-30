@@ -58,5 +58,6 @@ def logOutPage():
 	response = make_response(redirect(url_for('authController.loginPage')))
 	response.delete_cookie('token', path='/')
 	response.delete_cookie('userID', path='/')
+	del session['token']
 	session.pop('userID', None)
 	return response

@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}Invest{% endblock %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/myCardsPage.css') }}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="header-title">Looking for investments page</h1>
+    <p class="container-comment">Here you can find businesses to buy or invest</p>
+</div>
+
+<div class="card-grid">
+	{% for card in cards %}
+		<div class="card">
+			<img src="https://www.advgazeta.ru/upload/iblock/c6a/10_osnovnykh_prav_potrebiteley_1.jpg" alt="Product Image">
+			<h3>{{ card.name }}</h3>
+			<p>{{ card.description }}</p>
+			<p class="price">Required arrangement:  ${{ card.price_usd }}</p>
+            <p class="author">Author: {{ card.owner_id }}</p>
+			<p class="category">Category: {{ card.category }}</p>
+			<p class="likes">Bookmarks: {{ card.bookmarks_count }}</p>
+			<button>Like</button>
+		</div>
+	{% endfor %}
+</div>
+
+{% endblock %}

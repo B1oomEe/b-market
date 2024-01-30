@@ -55,6 +55,7 @@ def submitLoginForm():
 			return render_template('loginPage.html', form=form, error=ValidationErrorNotification("email", "User with this email doesn't exists"))
 		
 		if "error" in userDataFromDatabase: # Checking for errors in database response
+			print(userDataFromDatabase)
 			return render_template('loginPage.html', form=form, error=ServerErrorNotification("DATABASE ERROR", f"{userDataFromDatabase['message']}"))
 		
 		userDataFromDatabase = userDataFromDatabase[0]
@@ -63,12 +64,13 @@ def submitLoginForm():
 		
 		token = auth.tokenGenerator(data['email']) # Creating JWT-token
 		response = make_response(redirect(url_for('essentialController.homePage')))
-		response.set_cookie('token', token, path='/') # Setting JWT-token in cookies
+		response.set_cookie('token', token, path="/", expires=15_552_000) # Setting JWT-token in cookies | Expires 15_552_000 seconds = ~180 Days
 		
 		if request.form.get('rememberMe'): # If users sets Remember Me field to yes, we create cookies with his user id
-			response.set_cookie('userID', userDataFromDatabase[1], path='/')
+			response.set_cookie('userID', userDataFromDatabase[1], path='/', expires=15_552_000)  # Expires 15_552_000 seconds = ~180 Days
 		
 		session['userID'] = userDataFromDatabase[1] # Setting user ID in browser session
+		session['token'] = token
 		return response
 
 	return render_template('loginPage.html', form=form)
@@ -86,8 +88,7 @@ def submitRegistrationForm():
 		
 		isFormValid = RegistrationFormValidator(data['username'], data['email'], data['contact_email'], data['password'], data['confirm_password']).validateForm() # Checking form for validity
 		
-		if not isFormValid[0]: # Checking form valid status (isFormValid looks like: (False, "message error") or (True, "success"))
-			
+		if not isFormValid[0]:
 			return render_template('registrationPage.html', form=form, error=isFormValid)
 		
 		isUserWithThatEmaiExists = database.getUserDataByEmail(data['email'])
@@ -112,11 +113,14 @@ def submitRegistrationForm():
 		newUser = database.insertNewUser(dataForDatabase)
 		if newUser: # catching errors
 			return render_template('registrationPage.html', form=form, error=ServerErrorNotification("Critical error, while inserting new user", f"Error: {newUser['message']}"))
-		else:
-			token = auth.tokenGenerator(data['email'])
-			response = make_response(redirect(url_for('essentialController.homePage')))
-			response.set_cookie('token', token, path='/')
-			session['userID'] = uniqueUserUid
-			return response
+
+		token = auth.tokenGenerator(data['email'])
+		response = make_response(redirect(url_for('essentialController.homePage')))
+		response.set_cookie('token', token, path='/', expires=15_552_000) # Expires 15_552_000 seconds = ~180 Days
+		session['userID'] = uniqueUserUid
+
+		session['token'] = token
+
+		return response
 	
 	return render_template('registrationPage.html', form=form)

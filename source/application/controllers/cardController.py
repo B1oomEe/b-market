@@ -1,4 +1,6 @@
 from flask import render_template, request, redirect, url_for, make_response, session, Blueprint
+import plotly.express as px
+import pandas as pd
 
 from ..__init__ import auth, database, login_manager
 from ..validation.newCardValidation import NewCardForm, CardFormValidator
@@ -35,12 +37,10 @@ def homePage():
 def newCardPageProcess():
 	form = NewCardForm()
 	data = request.form.to_dict(flat=True)
-	
 
 	if form.validate_on_submit():
 		for field in ('csrf_token', 'title', 'category', 'purpose', 'stage', 'description', 'price', 'photos'):
 			if field not in list(data.keys()):
-				print(list(data.keys()))
 				return render_template('addCardPage.html', form=form, error=ClientErrorNotification("Form field names error", "Try to update this page to fix this problem"))
 		
 		isFormValid = CardFormValidator(data['title'], data['category'], data['purpose'], data['stage'], data['description'], data['price'], data['photos']).validateForm() # Checking form for validity
@@ -69,7 +69,7 @@ def newCardPageProcess():
 
 		userID = session['userID']
 		dataFromDataBase = database.getUserDataByField("uid", userID)
-	
+		print(dataFromDataBase)
 		newCards = dataFromDataBase.cards
 		newCards.append(uniqueCardUid)
 

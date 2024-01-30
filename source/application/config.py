@@ -6,6 +6,7 @@ import os
 load_dotenv()
 class Config(BaseSettings):
 	SECRET_KEY: str # Secret key for sessions and encryption
+	SESSION_COOKIE_HTTPONLY: str
 	SESSION_TYPE: str
 	SESSION_TIME: int
 	DB_PORT: int

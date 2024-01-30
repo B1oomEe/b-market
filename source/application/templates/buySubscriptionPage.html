@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}Subscription{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/buySubscription.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<h1>Choose Your Subscription</h1>
+<div class="row-container">
+    <div class="subscription-container">
+        <h2>Basic</h2>
+        <p>$10 / month</p>
+        <ul>
+            <li>Access to feature 1</li>
+            <li>Limited feature 2</li>
+            <li>Basic support</li>
+        </ul>
+        <button>Subscribe</button>
+    </div>
+
+    <div class="subscription-container">
+        <h2>Gold</h2>
+        <p>$20 / month</p>
+        <ul>
+            <li>Full access to feature 1</li>
+            <li>Enhanced feature 2</li>
+            <li>Priority support</li>
+            <li>Exclusive newsletter</li>
+        </ul>
+        <button>Subscribe</button>
+    </div>
+
+    <div class="subscription-container">
+        <h2>Platinum</h2>
+        <p>$30 / month</p>
+        <ul>
+            <li>Unlimited access to all features</li>
+            <li>Special access to feature 2</li>
+            <li>Premium support</li>
+            <li>Exclusive events</li>
+            <li>Personal account manager</li>
+        </ul>
+        <button>Subscribe</button>
+    </div>
+</div>
+
+{% endblock %}
