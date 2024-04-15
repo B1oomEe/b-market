@@ -24,12 +24,15 @@ def index():
 @auth.tokenRequired
 def homePage():
 	dataFromDataBase = database.getCardsByRandom()
+	if dataFromDataBase == None: dataFromDataBase = []
+	print(dataFromDataBase)
 	return render_template('homePage.html', cards=dataFromDataBase)
 
 @essentialController.route('/lookforinvestor', methods=['GET'])
 @auth.tokenRequired
 def lookforinvestorPage():
 	dataFromDataBase = database.getCardsByRandomWithTarget('Investment')
+	if dataFromDataBase == None: dataFromDataBase = []
 	return render_template('lookForInvestments.html', cards=dataFromDataBase)
 
 @essentialController.route('/buysubscription', methods=['GET'])
@@ -47,3 +50,17 @@ def getEmailInfo():
 	obj.sendEmailWithPlots(f"Info about {dataAboutCard.name}", dataAboutCard.description, userEmail)
 	dataFromDataBase = database.getCardsByRandom()
 	return render_template('homePage.html', cards=dataFromDataBase)
+
+@essentialController.route('/toLike', methods=['POST'])
+@auth.tokenRequired
+def toLike():
+	cardID = request.form.get('argument')
+	dataFromDataBase = database.getUserDataByField("uid", session.get('userID'))
+	print(dataFromDataBase.bookmarks)
+	if dataFromDataBase.bookmarks is None:
+		newCards = [cardID]
+	else:
+		newCards = dataFromDataBase.bookmarks
+		newCards.append(cardID)
+	database.updateUserData(session.get('userID'), {"bookmarks": newCards})
+	return render_template('homePage.html', cards=newCards)

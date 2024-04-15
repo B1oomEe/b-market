@@ -11,23 +11,25 @@
 {% block content %}
 
 <div class="container">
-    <h1 class="header-title">My Cards</h1>
-    <p class="container-comment">Here you can find your cards</p>
+	<h1 class="header-title">Мои карточки</h1>
+	<p class="container-comment">Здесь вы можете найти свои объявления</p>
 </div>
 
-<div class="card-grid">
-	{% for card in cards %}
-		<div class="card">
-			<img src="https://www.advgazeta.ru/upload/iblock/c6a/10_osnovnykh_prav_potrebiteley_1.jpg" alt="Product Image">
-			<h3>{{ card.name }}</h3>
-			<p>{{ card.description }}</p>
-			<p class="price">${{ card.price_usd }}</p>
-			<p class="category">Category: {{ card.category }}</p>
-			<p class="target">Target: {{ card.target }}</p>
-			<p class="likes">Bookmarks: {{ card.bookmarks_count }}</p>
-			<button>Add to Cart</button>
-		</div>
-	{% endfor %}
-</div>
+{% if cards %}
+	<div class="card-grid">
+		{% for card in cards %}
+			<div class="card">
+				<img src="https://www.advgazeta.ru/upload/iblock/c6a/10_osnovnykh_prav_potrebiteley_1.jpg" alt="Product Image">
+				<h3>{{ card.name }}</h3>
+				<p>{{ card.description }}</p>
+				<p class="price">${{ card.price_usd }}</p>
+				<p class="category">Категория: {{ card.category }}</p>
+				<p class="target">Цель продавца: {{ card.target }}</p>
+				<p class="likes">Кол-во закладок: {{ card.bookmarks_count }}</p>
+			</div>
+		{% endfor %}
+	</div>
+{% endif %}
+
 
 {% endblock %}

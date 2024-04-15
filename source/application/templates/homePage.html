@@ -9,16 +9,16 @@
 {% endblock %}
 
 {% block content %}
+<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet"/>
 
 <div class="loading-overlay">
 	<div class="loading-spinner"></div>
 </div>
 
-<div class="container">
-	<h1 class="header-title">Welcome to the Home page!</h1>
-	<p class="container-comment">Here you can find information about selling businesses</p>
+<div style="height: 110px;">
 </div>
 
+{% if cards %}
 <div class="card-grid">
 	{% for card in cards %}
 		<div class="card">
@@ -27,14 +27,16 @@
 			<h3>{{ card.name }}</h3>
 			<p>{{ card.description }}</p>
 			<p class="price">${{ card.price_usd }}</p>
-			<p class="author">Author: {{ card.owner_id }}</p>
-			<p class="category">Category: {{ card.category }}</p>
-			<p class="target">Target: {{ card.target }}</p>
-			<p class="likes">Bookmarks: {{ card.bookmarks_count }}</p>
-			<button class="executeButton" data-argument="{{ card.cid }}">Get more info</button>
+			<p class="author">Автор: {{ card.owner_id }}</p>
+			<p class="category">Категория: {{ card.category }}</p>
+			<p class="target">Цель продавца: {{ card.target }}</p>
+			<p class="likes">Кол-во закладок: {{ card.bookmarks_count }}</p>
+			<button class="executeButton" data-argument="{{ card.cid }}">Больше информации на почту</button>
+			<button class="executeButton2" data-argument="{{ card.cid }}">Добавить в корзину</button>
 		</div>
 	{% endfor %}
 </div>
+{% endif %}
 
 <script>
 	$(document).ready(function(){
@@ -50,22 +52,55 @@
 				data: {argument: argumentValue, csrf_token: csrfToken},
 				success: function(response){
 					hideLoadingOverlay(); // Скрыть индикатор загрузки
-					alert('Message sended');
+					alert('Сообщение отправлено');
 				},
 				error: function(error){
 					hideLoadingOverlay(); // Скрыть индикатор загрузки
-					alert('Error occured: ' + error.responseText);
+					alert('Ошибка: ' + error.responseText);
 				}
 			});
 		});
-	
-		function showLoadingOverlay() {
-			$(".loading-overlay").show();
-		}
-	
-		function hideLoadingOverlay() {
-			$(".loading-overlay").hide();
-		}
+
+	function showLoadingOverlay() {
+		$(".loading-overlay").show();
+	}
+
+	function hideLoadingOverlay() {
+		$(".loading-overlay").hide();
+	}
+	});
+</script>
+
+<script>
+	$(document).ready(function(){
+		$(".executeButton2").click(function(){
+			showLoadingOverlay(); // Показать индикатор загрузки
+		
+			var argumentValue = $(this).data('argument');
+			var csrfToken = "{{ csrf_token() }}";
+		
+			$.ajax({
+				type: 'POST',
+				url: '/toLike',
+				data: {argument: argumentValue, csrf_token: csrfToken},
+				success: function(response){
+					hideLoadingOverlay(); // Скрыть индикатор загрузки
+					alert('Товар добавлен в корзину');
+				},
+				error: function(error){
+					hideLoadingOverlay(); // Скрыть индикатор загрузки
+					alert('Ошибка: ' + error.responseText);
+				}
+			});
+		});
+
+	function showLoadingOverlay() {
+		$(".loading-overlay").show();
+	}
+
+	function hideLoadingOverlay() {
+		$(".loading-overlay").hide();
+	}
 	});
 </script>
 

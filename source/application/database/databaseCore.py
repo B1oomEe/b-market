@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import func
 
-from .databaseModels import User, Card
+from .databaseModels import User, Card, Base
 
 from ..config import config
 
@@ -17,7 +17,9 @@ class PostgresDatabase():
 				echo = False
 			)
 			self.Session = sessionmaker(bind=self.engine)
+			Base.metadata.create_all(self.engine)
 			print("Created engine for database successfully.")
+
 		except Exception as e:
 			print(f"Error: Unable to create engine for database.\n{e}")
 			raise  # Reraise the exception to let the caller handle it
@@ -67,6 +69,7 @@ class PostgresDatabase():
 				session.add(newUser)
 				session.commit()
 			except SQLAlchemyError as error:
+				print(str(error))
 				return {
 					"message": "Internal database error",
 					"error": True,

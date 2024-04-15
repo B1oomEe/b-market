@@ -39,15 +39,17 @@ def newCardPageProcess():
 	data = request.form.to_dict(flat=True)
 
 	if form.validate_on_submit():
-		for field in ('csrf_token', 'title', 'category', 'purpose', 'stage', 'description', 'price', 'photos'):
-			if field not in list(data.keys()):
-				return render_template('addCardPage.html', form=form, error=ClientErrorNotification("Form field names error", "Try to update this page to fix this problem"))
-		
-		isFormValid = CardFormValidator(data['title'], data['category'], data['purpose'], data['stage'], data['description'], data['price'], data['photos']).validateForm() # Checking form for validity
-		if isFormValid: # Checking form valid status
+		# Проверяем наличие обязательных полей
+		required_fields = ['csrf_token', 'title', 'category', 'purpose', 'stage', 'description', 'price', 'photos']
+		if not all(field in data for field in required_fields):
+			return render_template('addCardPage.html', form=form, error=ClientErrorNotification("Form field names error", "Try to update this page to fix this problem"))
+
+		# Дополнительная валидация формы карточки
+		isFormValid = CardFormValidator(data['title'], data['category'], data['purpose'], data['stage'], data['description'], data['price'], data['photos']).validateForm()
+		if isFormValid:
 			return render_template('addCardPage.html', form=form, error=ValidationErrorNotification(isFormValid['field'], isFormValid['message']))
-		
-		
+
+		# Генерация уникального идентификатора карточки
 		def findUniqueCardUid():
 			cardID = StripGenerator.generateCardID()
 			if database.getUserDataByField("uid", cardID):
@@ -55,6 +57,7 @@ def newCardPageProcess():
 			return cardID
 		uniqueCardUid = findUniqueCardUid()
 
+		# Подготовка данных для сохранения в базе данных
 		dataForDatabase = {
 			"cid": uniqueCardUid,
 			"name": data['title'],
@@ -69,16 +72,21 @@ def newCardPageProcess():
 
 		userID = session['userID']
 		dataFromDataBase = database.getUserDataByField("uid", userID)
-		print(dataFromDataBase)
-		newCards = dataFromDataBase.cards
-		newCards.append(uniqueCardUid)
 
+		# Если пользователь не имеет карточек, создаем новый список с одной карточкой
+		if dataFromDataBase.cards is None:
+			newCards = [uniqueCardUid]
+		else:
+			newCards = dataFromDataBase.cards
+			newCards.append(uniqueCardUid)
+
+		# Обновление данных пользователя в базе данных
 		database.updateUserData(userID, {"cards": newCards})
+
+		# Вставка новой карточки в базу данных
 		database.insertNewCard(dataForDatabase)
 
-		response = make_response(redirect(url_for('essentialController.homePage')))
-		
-		
-		return response
+		# Перенаправление на домашнюю страницу
+		return redirect(url_for('essentialController.homePage'))
 
 	return render_template('addCardPage.html', form=form)

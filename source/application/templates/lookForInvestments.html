@@ -19,15 +19,84 @@
 	{% for card in cards %}
 		<div class="card">
 			<img src="https://www.advgazeta.ru/upload/iblock/c6a/10_osnovnykh_prav_potrebiteley_1.jpg" alt="Product Image">
+			<p id="cid" style="display: none;"></p>
 			<h3>{{ card.name }}</h3>
 			<p>{{ card.description }}</p>
-			<p class="price">Required arrangement:  ${{ card.price_usd }}</p>
-            <p class="author">Author: {{ card.owner_id }}</p>
-			<p class="category">Category: {{ card.category }}</p>
-			<p class="likes">Bookmarks: {{ card.bookmarks_count }}</p>
-			<button>Like</button>
+			<p class="price">${{ card.price_usd }}</p>
+			<p class="author">Автор: {{ card.owner_id }}</p>
+			<p class="category">Категория: {{ card.category }}</p>
+			<p class="target">Цель продавца: {{ card.target }}</p>
+			<p class="likes">Кол-во закладок: {{ card.bookmarks_count }}</p>
+			<button class="executeButton" data-argument="{{ card.cid }}">Больше информации на почту</button>
+			<button class="executeButton2" data-argument="{{ card.cid }}">Добавить в корзину</button>
 		</div>
 	{% endfor %}
 </div>
+<script>
+	$(document).ready(function(){
+		$(".executeButton").click(function(){
+			showLoadingOverlay(); // Показать индикатор загрузки
+		
+			var argumentValue = $(this).data('argument');
+			var csrfToken = "{{ csrf_token() }}";
+		
+			$.ajax({
+				type: 'POST',
+				url: '/getEmailInfo',
+				data: {argument: argumentValue, csrf_token: csrfToken},
+				success: function(response){
+					hideLoadingOverlay(); // Скрыть индикатор загрузки
+					alert('Сообщение отправлено');
+				},
+				error: function(error){
+					hideLoadingOverlay(); // Скрыть индикатор загрузки
+					alert('Ошибка: ' + error.responseText);
+				}
+			});
+		});
 
+	function showLoadingOverlay() {
+		$(".loading-overlay").show();
+	}
+
+	function hideLoadingOverlay() {
+		$(".loading-overlay").hide();
+	}
+	});
+</script>
+
+<script>
+	$(document).ready(function(){
+		$(".executeButton2").click(function(){
+			showLoadingOverlay(); // Показать индикатор загрузки
+		
+			var argumentValue = $(this).data('argument');
+			var csrfToken = "{{ csrf_token() }}";
+		
+			$.ajax({
+				type: 'POST',
+				url: '/toLike',
+				data: {argument: argumentValue, csrf_token: csrfToken},
+				success: function(response){
+					hideLoadingOverlay(); // Скрыть индикатор загрузки
+					alert('Товар добавлен в корзину');
+				},
+				error: function(error){
+					hideLoadingOverlay(); // Скрыть индикатор загрузки
+					alert('Ошибка: ' + error.responseText);
+				}
+			});
+		});
+
+	function showLoadingOverlay() {
+		$(".loading-overlay").show();
+	}
+
+	function hideLoadingOverlay() {
+		$(".loading-overlay").hide();
+	}
+	});
+</script>
+
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
 {% endblock %}

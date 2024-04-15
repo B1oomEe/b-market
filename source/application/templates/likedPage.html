@@ -1,14 +1,35 @@
 {% extends "layout.html" %}
 
-{% block title %}Liked{% endblock %}
+{% block title %}Корзина{% endblock %}
 
-{% block head %}{% endblock %}
+{% block head %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/myCardsPage.css') }}">
+
+{% endblock %}
 
 {% block content %}
 
 <div class="container">
-    <h1 class="header-title">Liked</h1>
-    <p class="container-comment">Here you can find cards you liked!</p>
+	<h1 class="header-title">Корзина</h1>
+	<p class="container-comment">Здесь вы можете найти объявления, которые добавили в корзину</p>
 </div>
+
+{% if cards %}
+	<div class="card-grid">
+		{% for card in cards %}
+			<div class="card">
+				<img src="https://www.advgazeta.ru/upload/iblock/c6a/10_osnovnykh_prav_potrebiteley_1.jpg" alt="Product Image">
+				<h3>{{ card.name }}</h3>
+				<p>{{ card.description }}</p>
+				<p class="price">${{ card.price_usd }}</p>
+				<p class="category">Категория: {{ card.category }}</p>
+				<p class="target">Цель продавца: {{ card.target }}</p>
+				<p class="likes">Кол-во закладок: {{ card.bookmarks_count }}</p>
+			</div>
+		{% endfor %}
+	</div>
+{% endif %}
+
 
 {% endblock %}

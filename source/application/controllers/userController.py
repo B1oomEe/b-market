@@ -16,7 +16,7 @@ def load_user(user_id):
 @userController.route('/profile', methods=['POST'])
 @auth.tokenRequired
 def profile():
-    pass
+	pass
 
 @userController.route('/mycards', methods=['GET'])
 @auth.tokenRequired
@@ -31,15 +31,25 @@ def mycardsPage():
 			"errorLog": str(error)
 		}
 	else:
-		cards = []
-		for card in dataFromDataBase.cards:
-			cards.append(database.getCardByCID(card))
+		if dataFromDataBase.cards is None:
+			cards = []  # Получаем список карточек пользователя
+		else:
+			cards = []
+			for card in dataFromDataBase.cards:
+				cards.append(database.getCardByCID(card))
+		print(dataFromDataBase.cards)
 		return render_template('myCardsPage.html', cards=cards)
+
+
 
 @userController.route('/liked', methods=['GET'])
 @auth.tokenRequired
 def likedPage():
-	return render_template('likedPage.html')
+	dataFromDataBase = database.getUserDataByField("uid", session.get('userID'))
+	cards = []
+	for card in dataFromDataBase.bookmarks:
+		cards.append(database.getCardByCID(card))
+	return render_template('likedPage.html', cards=cards)
 
 @userController.route('/settings', methods=['GET'])
 @auth.tokenRequired
