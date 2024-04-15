@@ -2,16 +2,16 @@ from flask import render_template, request, redirect, url_for, make_response, se
 import plotly.express as px
 import pandas as pd
 
-from ..__init__ import auth, database, login_manager
+from ..__init__ import auth, database # , login_manager
 from ..validation.newCardValidation import NewCardForm, CardFormValidator
 from ..utils.stripGenerator import StripGenerator
 from ..utils.notificationsClassification import *
 
 cardController = Blueprint('cardController', __name__)
 
-@login_manager.user_loader
-def load_user(user_id):
-	return user_id
+# @login_manager.user_loader
+# def load_user(user_id):
+# 	return user_id
 
 @cardController.route('/newcard', methods=['GET'])
 @auth.tokenRequired
@@ -40,12 +40,12 @@ def newCardPageProcess():
 
 	if form.validate_on_submit():
 		# Проверяем наличие обязательных полей
-		required_fields = ['csrf_token', 'title', 'category', 'purpose', 'stage', 'description', 'price', 'photos']
+		required_fields = ['csrf_token', 'title', 'category', 'purpose', 'stage', 'description', 'price']
 		if not all(field in data for field in required_fields):
 			return render_template('addCardPage.html', form=form, error=ClientErrorNotification("Form field names error", "Try to update this page to fix this problem"))
 
 		# Дополнительная валидация формы карточки
-		isFormValid = CardFormValidator(data['title'], data['category'], data['purpose'], data['stage'], data['description'], data['price'], data['photos']).validateForm()
+		isFormValid = CardFormValidator(data['title'], data['category'], data['purpose'], data['stage'], data['description'], data['price']).validateForm()
 		if isFormValid:
 			return render_template('addCardPage.html', form=form, error=ValidationErrorNotification(isFormValid['field'], isFormValid['message']))
 
@@ -66,7 +66,7 @@ def newCardPageProcess():
 			"target": data['purpose'],
 			"price_usd": data['price'],
 			"description": data['description'],
-			"images": data['photos'],
+			"images": '',
 			"stage": data['stage']
 		}
 

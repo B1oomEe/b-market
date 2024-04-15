@@ -124,6 +124,36 @@ class PostgresDatabase():
 					"errorLog": str(error)
 				}
 				
+	def updateCardData(self, cid: str, dataDict: dict) -> dict | None:
+		with self.Session() as session:
+			try:
+				card = session.query(Card).filter_by(cid=cid).first()
+				if card:
+					for key, value in dataDict.items():
+						setattr(card, key, value)
+					session.commit()
+					return {
+						"message": "Card data updated successfully",
+						"error": False
+					}
+				else:
+					return {
+						"message": "Card not found",
+						"error": True
+					}
+			except SQLAlchemyError as error:
+				return {
+					"message": "Internal database error",
+					"error": True,
+					"errorLog": str(error)
+				}
+			except Exception as error:
+				return {
+					"message": "Data validation fail",
+					"error": True,
+					"errorLog": str(error)
+				}
+
 
 	def insertNewCard(self, data: dict) -> dict | None:
 		with self.Session() as session:

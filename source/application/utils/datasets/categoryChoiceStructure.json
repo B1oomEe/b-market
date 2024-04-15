@@ -1,72 +1,72 @@
 {
-	"Retail Trade": [
-		"Grocery Stores",
-		"Clothing and Footwear",
-		"Electronics and Appliances",
-		"Cosmetics and Perfumes",
-		"Automotive Parts and Accessories"
+	"Розничная торговля": [
+		"Продуктовые магазины",
+		"Одежда и обувь",
+		"Электроника и бытовая техника",
+		"Косметика и парфюмерия",
+		"Автозапчасти и аксессуары"
 	],
-	"Food Service": [
-		"Restaurants",
-		"Cafes",
-		"Bars and Nightclubs",
-		"Fast Food",
-		"Catering Services"
+	"Общественное питание": [
+		"Рестораны",
+		"Кафе",
+		"Бары и ночные клубы",
+		"Фаст-фуд",
+		"Кейтеринговые услуги"
 	],
-	"Manufacturing": [
-		"Food Industry",
-		"Machinery and Engineering",
-		"Chemical Industry",
-		"Electronics and Microelectronics",
-		"Wood Processing Industry"
+	"Производство": [
+		"Пищевая промышленность",
+		"Машиностроение и инженерия",
+		"Химическая промышленность",
+		"Электроника и микроэлектроника",
+		"Деревообрабатывающая промышленность"
 	],
-	"Franchising": [
-		"Restaurant Chains",
-		"Stores and Retail Franchises",
-		"Fitness Centers",
-		"Educational Franchises",
-		"Medical Franchises"
+	"Франчайзинг": [
+		"Сети ресторанов",
+		"Магазины и розничные франшизы",
+		"Фитнес-центры",
+		"Образовательные франшизы",
+		"Медицинские франшизы"
 	],
-	"Technology and Startups": [
-		"Software Development",
-		"Internet Technologies and E-Commerce",
-		"Medical and Biotechnology Startups",
-		"Energy Technologies",
-		"Artificial Intelligence and Machine Learning"
+	"Технологии и стартапы": [
+		"Разработка программного обеспечения",
+		"Интернет-технологии и электронная коммерция",
+		"Медицинские и биотехнологические стартапы",
+		"Энергетические технологии",
+		"Искусственный интеллект и машинное обучение"
 	],
-	"Financial Services": [
-		"Banks and Financial Institutions",
-		"Insurance Companies",
-		"Investment Funds",
-		"Financial Consultations",
-		"Tax and Legal Services"
+	"Финансовые услуги": [
+		"Банки и финансовые учреждения",
+		"Страховые компании",
+		"Инвестиционные фонды",
+		"Финансовые консультации",
+		"Налоговые и юридические услуги"
 	],
-	"Real Estate": [
-		"Commercial Real Estate",
-		"Hotels and Motels",
-		"Apartments and Residential Complexes",
-		"Shopping Centers",
-		"Manufacturing Facilities"
+	"Недвижимость": [
+		"Коммерческая недвижимость",
+		"Отели и мотели",
+		"Апартаменты и жилые комплексы",
+		"Торговые центры",
+		"Производственные объекты"
 	],
-	"Services and Consulting": [
-		"Legal Services",
-		"Marketing and Advertising Agencies",
-		"Engineering and Architectural Consultations",
-		"Information Technologies",
-		"Educational Services"
+	"Услуги и консалтинг": [
+		"Юридические услуги",
+		"Маркетинговые и рекламные агентства",
+		"Инженерные и архитектурные консультации",
+		"Информационные технологии",
+		"Образовательные услуги"
 	],
-	"Healthcare": [
-		"Medical Clinics",
-		"Dental Clinics",
-		"Pharmaceutical Companies",
-		"Medical Equipment",
-		"Laboratories and Diagnostic Centers"
+	"Здравоохранение": [
+		"Медицинские клиники",
+		"Стоматологические клиники",
+		"Фармацевтические компании",
+		"Медицинское оборудование",
+		"Лаборатории и диагностические центры"
 	],
-	"Agriculture and Agribusiness": [
-		"Crop Farming",
-		"Livestock Farming",
-		"Agrotourism",
-		"Agricultural Machinery Production",
-		"Logging and Wood Processing"
+	"Сельское хозяйство и агробизнес": [
+		"Растениеводство",
+		"Животноводство",
+		"Агротуризм",
+		"Производство сельскохозяйственной техники",
+		"Лесозаготовки и деревообработка"
 	]
 }

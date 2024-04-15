@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, make_r
 from flask_login import login_user, current_user, logout_user, login_required
 
 
-from .. import database, login_manager, auth
+from .. import database, auth # , login_manager
 from ..validation.registrationValidation import RegistrationForm, RegistrationFormValidator
 from ..validation.loginValidation import LoginForm, LoginFormValidator
 from ..utils.stripGenerator import StripGenerator
@@ -12,9 +12,9 @@ from ..utils.notificationsClassification import *
 
 authController = Blueprint('authController', __name__)
 
-@login_manager.user_loader
-def load_user(user_id):
-	return user_id
+# @login_manager.user_loader
+# def load_user(user_id):
+# 	return user_id
 
 
 @authController.route('/registration', methods=['GET'])

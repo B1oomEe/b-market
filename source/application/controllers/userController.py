@@ -2,16 +2,16 @@ from flask import Blueprint, render_template, request, redirect, url_for, make_r
 from flask_login import login_user, current_user, logout_user, login_required
 from sqlalchemy.exc import SQLAlchemyError
 
-from .. import auth, database, login_manager
+from .. import auth, database# , login_manager
 from ..validation.registrationValidation import RegistrationForm
 from ..validation.loginValidation import LoginForm
 from ..utils.stripGenerator import StripGenerator
 
 userController = Blueprint('userController', __name__)
 
-@login_manager.user_loader
-def load_user(user_id):
-	return user_id
+# @login_manager.user_loader
+# def load_user(user_id):
+# 	return user_id
 
 @userController.route('/profile', methods=['POST'])
 @auth.tokenRequired

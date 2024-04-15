@@ -3,160 +3,160 @@ from wtforms import StringField, SelectField, TextAreaField, FileField, BooleanF
 
 
 class NewCardForm(FlaskForm):
-	title = StringField('Title')
-	category = SelectField('Category', 
+	title = StringField('Заголовок')
+	category = SelectField('Категория', 
 		choices=[
-		('', 'Select category'),
-		('Grocery Stores', 'Grocery Stores'), 
-		('Clothing and Footwear', 'Clothing and Footwear'), 
-		('Electronics and Appliances', 'Electronics and Appliances'), 
-		('Cosmetics and Perfumes', 'Cosmetics and Perfumes'), 
-		('Automotive Parts and Accessories', 'Automotive Parts and Accessories'), 
-		('Restaurants', 'Restaurants'), 
-		('Cafes', 'Cafes'), 
-		('Bars and Nightclubs', 'Bars and Nightclubs'), 
-		('Fast Food', 'Fast Food'), 
-		('Catering Services', 'Catering Services'), 
-		('Food Industry', 'Food Industry'), 
-		('Machinery and Engineering', 'Machinery and Engineering'), 
-		('Chemical Industry', 'Chemical Industry'), 
-		('Electronics and Microelectronics', 'Electronics and Microelectronics'), 
-		('Wood Processing Industry', 'Wood Processing Industry'), 
-		('Restaurant Chains', 'Restaurant Chains'), 
-		('Stores and Retail Franchises', 'Stores and Retail Franchises'), 
-		('Fitness Centers', 'Fitness Centers'), 
-		('Educational Franchises', 'Educational Franchises'), 
-		('Medical Franchises', 'Medical Franchises'), 
-		('Software Development', 'Software Development'), 
-		('Internet Technologies and E-Commerce', 'Internet Technologies and E-Commerce'), 
-		('Medical and Biotechnology Startups', 'Medical and Biotechnology Startups'), 
-		('Energy Technologies', 'Energy Technologies'), 
-		('Artificial Intelligence and Machine Learning', 'Artificial Intelligence and Machine Learning'), 
-		('Banks and Financial Institutions', 'Banks and Financial Institutions'), 
-		('Insurance Companies', 'Insurance Companies'), 
-		('Investment Funds', 'Investment Funds'), 
-		('Financial Consultations', 'Financial Consultations'), 
-		('Tax and Legal Services', 'Tax and Legal Services'), 
-		('Commercial Real Estate', 'Commercial Real Estate'), 
-		('Hotels and Motels', 'Hotels and Motels'), 
-		('Apartments and Residential Complexes', 'Apartments and Residential Complexes'), 
-		('Shopping Centers', 'Shopping Centers'), 
-		('Manufacturing Facilities', 'Manufacturing Facilities'), 
-		('Legal Services', 'Legal Services'), 
-		('Marketing and Advertising Agencies', 'Marketing and Advertising Agencies'),
-		('Engineering and Architectural Consultations', 'Engineering and Architectural Consultations'), 
-		('Information Technologies', 'Information Technologies'), 
-		('Educational Services', 'Educational Services'), 
-		('Medical Clinics', 'Medical Clinics'), 
-		('Dental Clinics', 'Dental Clinics'), 
-		('Pharmaceutical Companies', 'Pharmaceutical Companies'), 
-		('Medical Equipment', 'Medical Equipment'), 
-		('Laboratories and Diagnostic Centers', 'Laboratories and Diagnostic Centers'), 
-		('Crop Farming', 'Crop Farming'), 
-		('Livestock Farming', 'Livestock Farming'), 
-		('Agrotourism', 'Agrotourism'), 
-		('Agricultural Machinery Production', 'Agricultural Machinery Production'), 
-		('Logging and Wood Processing', 'Logging and Wood Processing')
+		('', 'Выберите категорию'),
+		('Продуктовые магазины', 'Продуктовые магазины'), 
+		('Одежда и обувь', 'Одежда и обувь'), 
+		('Электроника и бытовая техника', 'Электроника и бытовая техника'), 
+		('Косметика и парфюмерия', 'Косметика и парфюмерия'), 
+		('Автозапчасти и аксессуары', 'Автозапчасти и аксессуары'), 
+		('Рестораны', 'Рестораны'), 
+		('Кафе', 'Кафе'), 
+		('Бары и ночные клубы', 'Бары и ночные клубы'), 
+		('Фаст-фуд', 'Фаст-фуд'), 
+		('Кейтеринговые услуги', 'Кейтеринговые услуги'), 
+		('Пищевая промышленность', 'Пищевая промышленность'), 
+		('Машиностроение и инженерия', 'Машиностроение и инженерия'), 
+		('Химическая промышленность', 'Химическая промышленность'), 
+		('Электроника и микроэлектроника', 'Электроника и микроэлектроника'), 
+		('Деревообрабатывающая промышленность', 'Деревообрабатывающая промышленность'), 
+		('Сети ресторанов', 'Сети ресторанов'), 
+		('Магазины и розничные франшизы', 'Магазины и розничные франшизы'), 
+		('Фитнес-центры', 'Фитнес-центры'), 
+		('Образовательные франшизы', 'Образовательные франшизы'), 
+		('Медицинские франшизы', 'Медицинские франшизы'), 
+		('Разработка программного обеспечения', 'Разработка программного обеспечения'), 
+		('Интернет-технологии и электронная коммерция', 'Интернет-технологии и электронная коммерция'), 
+		('Медицинские и биотехнологические стартапы', 'Медицинские и биотехнологические стартапы'), 
+		('Энергетические технологии', 'Энергетические технологии'), 
+		('Искусственный интеллект и машинное обучение', 'Искусственный интеллект и машинное обучение'), 
+		('Банки и финансовые учреждения', 'Банки и финансовые учреждения'), 
+		('Страховые компании', 'Страховые компании'), 
+		('Инвестиционные фонды', 'Инвестиционные фонды'), 
+		('Финансовые консультации', 'Финансовые консультации'), 
+		('Налоговые и юридические услуги', 'Налоговые и юридические услуги'), 
+		('Коммерческая недвижимость', 'Коммерческая недвижимость'), 
+		('Отели и мотели', 'Отели и мотели'), 
+		('Апартаменты и жилые комплексы', 'Апартаменты и жилые комплексы'), 
+		('Торговые центры', 'Торговые центры'), 
+		('Производственные объекты', 'Производственные объекты'), 
+		('Юридические услуги', 'Юридические услуги'), 
+		('Маркетинговые и рекламные агентства', 'Маркетинговые и рекламные агентства'),
+		('Инженерные и архитектурные консультации', 'Инженерные и архитектурные консультации'), 
+		('Информационные технологии', 'Информационные технологии'), 
+		('Образовательные услуги', 'Образовательные услуги'), 
+		('Медицинские клиники', 'Медицинские клиники'), 
+		('Стоматологические клиники', 'Стоматологические клиники'), 
+		('Фармацевтические компании', 'Фармацевтические компании'), 
+		('Медицинское оборудование', 'Медицинское оборудование'), 
+		('Лаборатории и диагностические центры', 'Лаборатории и диагностические центры'), 
+		('Растениеводство', 'Растениеводство'), 
+		('Животноводство', 'Животноводство'), 
+		('Агротуризм', 'Агротуризм'), 
+		('Производство сельскохозяйственной техники', 'Производство сельскохозяйственной техники'), 
+		('Лесозаготовки и деревообработка', 'Лесозаготовки и деревообработка')
 	])
 
-	purpose = SelectField('Purpose of Sale', choices=[
-		('', 'Select Purpose' ),
-		('Investment', 'Investment'), 
-		('Buy', 'Buy'), 
-		('Finding partners', 'Finding partners'), 
-		('Looking for buy/invest offers', 'Looking for buy/invest offers'), 
-		('Looking for partnership', 'Looking for partnership'), 
-		('Looking for loan offers', 'Looking for loan offers')
+	purpose = SelectField('Цель продажи', choices=[
+		('', 'Выберите цель' ),
+		('Инвестирование', 'Инвестирование'), 
+		('Покупка', 'Покупка'), 
+		('Поиск партнеров', 'Поиск партнеров'), 
+		('Поиск предложений о покупке/инвестировании', 'Поиск предложений о покупке/инвестировании'), 
+		('Поиск партнерства', 'Поиск партнерства'), 
+		('Поиск предложений о займах', 'Поиск предложений о займах')
 	])
-	stage = SelectField('Stage', choices=[
-		('', 'Select Stage'),
-		('Idea', 'Idea'),
-		('Startup (have a team)', 'Startup (have a team)'),
-		('Constant profit', 'Constant profit'),
-		('No profit', 'No profit')
-	])
-	description = TextAreaField('Description')
-	price = StringField('Price')
-	photos = FileField('Photos')
-	waitForInvest = BooleanField('Looking for investments?')
+	stage = SelectField('Этап', choices=[
+			('', 'Выберите этап'),
+			('Идея', 'Идея'),
+			('Стартап (есть команда)', 'Стартап (есть команда)'),
+			('Постоянная прибыль', 'Постоянная прибыль'),
+			('Нет прибыли', 'Нет прибыли')
+		])
+
+	description = TextAreaField('Описание')
+	price = StringField('Цена')
+	# photos = FileField('Ф')
+	# waitForInvest = BooleanField('Looking for investments?')
 
 class CardFormValidator():
-	def __init__(self, title: str, category: str, purpose: str, stage: str, description: str, price: str, photos: str):
+	def __init__(self, title: str, category: str, purpose: str, stage: str, description: str, price: str): #, photos: str
 		self.title = title
 		self.category = category
 		self.purpose = purpose
 		self.stage = stage
 		self.description = description
 		self.price = price
-		self.photos = photos
+		# self.photos = photos
 
 		self.categories = [
-		    'Grocery Stores',
-		    'Clothing and Footwear',
-		    'Electronics and Appliances',
-		    'Cosmetics and Perfumes',
-		    'Automotive Parts and Accessories',
-		    'Restaurants',
-		    'Cafes',
-		    'Bars and Nightclubs',
-		    'Fast Food',
-		    'Catering Services',
-		    'Food Industry',
-		    'Machinery and Engineering',
-		    'Chemical Industry',
-		    'Electronics and Microelectronics',
-		    'Wood Processing Industry',
-		    'Restaurant Chains',
-		    'Stores and Retail Franchises',
-		    'Fitness Centers',
-		    'Educational Franchises',
-		    'Medical Franchises',
-		    'Software Development',
-		    'Internet Technologies and E-Commerce',
-		    'Medical and Biotechnology Startups',
-		    'Energy Technologies',
-		    'Artificial Intelligence and Machine Learning',
-		    'Banks and Financial Institutions',
-		    'Insurance Companies',
-		    'Investment Funds',
-		    'Financial Consultations',
-		    'Tax and Legal Services',
-		    'Commercial Real Estate',
-		    'Hotels and Motels',
-		    'Apartments and Residential Complexes',
-		    'Shopping Centers',
-		    'Manufacturing Facilities',
-		    'Legal Services',
-		    'Marketing and Advertising Agencies',
-		    'Engineering and Architectural Consultations',
-		    'Information Technologies',
-		    'Educational Services',
-		    'Medical Clinics',
-		    'Dental Clinics',
-		    'Pharmaceutical Companies',
-		    'Medical Equipment',
-		    'Laboratories and Diagnostic Centers',
-		    'Crop Farming',
-		    'Livestock Farming',
-		    'Agrotourism',
-		    'Agricultural Machinery Production',
-		    'Logging and Wood Processing'
+			"Продуктовые магазины",
+			"Одежда и обувь",
+			"Электроника и бытовая техника",
+			"Косметика и парфюмерия",
+			"Автозапчасти и аксессуары",
+			"Рестораны",
+			"Кафе",
+			"Бары и ночные клубы",
+			"Фаст-фуд",
+			"Кейтеринговые услуги",
+			"Пищевая промышленность",
+			"Машиностроение и инженерия",
+			"Химическая промышленность",
+			"Электроника и микроэлектроника",
+			"Деревообрабатывающая промышленность",
+			"Сети ресторанов",
+			"Магазины и розничные франшизы",
+			"Фитнес-центры",
+			"Образовательные франшизы",
+			"Медицинские франшизы",
+			"Разработка программного обеспечения",
+			"Интернет-технологии и электронная коммерция",
+			"Медицинские и биотехнологические стартапы",
+			"Энергетические технологии",
+			"Искусственный интеллект и машинное обучение",
+			"Банки и финансовые учреждения",
+			"Страховые компании",
+			"Инвестиционные фонды",
+			"Финансовые консультации",
+			"Налоговые и юридические услуги",
+			"Коммерческая недвижимость",
+			"Отели и мотели",
+			"Апартаменты и жилые комплексы",
+			"Торговые центры",
+			"Производственные объекты",
+			"Юридические услуги",
+			"Маркетинговые и рекламные агентства",
+			"Инженерные и архитектурные консультации",
+			"Информационные технологии",
+			"Образовательные услуги",
+			"Медицинские клиники",
+			"Стоматологические клиники",
+			"Фармацевтические компании",
+			"Медицинское оборудование",
+			"Лаборатории и диагностические центры",
+			"Растениеводство",
+			"Животноводство",
+			"Агротуризм",
+			"Производство сельскохозяйственной техники",
+			"Лесозаготовки и деревообработка"
 		]
 
 		self.purposes = [
-			'Investment', 
-			'Buy',
-			'Finding partners',
-			'Looking for buy/invest offers',
-			'Looking for partnership', 
-			'Looking for loan offers'
+			"Инвестирование",
+			"Покупка",
+			"Поиск партнеров",
+			"Поиск предложений о покупке/инвестировании",
+			"Поиск партнерства",
+			"Поиск предложений о займах"
 		]
-
 		self.stages = [
-			'Idea',
-			'Startup (have a team)',
-			'Constant profit',
-			'No profit'
+			"Идея",
+			"Стартап (есть команда)",
+			"Постоянная прибыль",
+			"Нет прибыли"
 		]
 		
 
@@ -245,18 +245,17 @@ class CardFormValidator():
 					"field": "price"
 				}
 		
-	def validatePhotos(self) -> None | dict:
-		return
+	
 
 
 	def validateForm(self) -> dict | None:
 		fields_to_validate = {
-			'title': self.validateTitle,
-			'category': self.validateCategory,
-			'stage': self.validateStage,
-			'description': self.validateDescription,
-			'price': self.validatePrice,
-			'photos': self.validatePhotos
+			'Заголовок': self.validateTitle,
+			'Категория': self.validateCategory,
+			'Стадия': self.validateStage,
+			'Описание': self.validateDescription,
+			'Цена': self.validatePrice,
+			#'photos': self.validatePhotos
 		}
 
 		for field_name, validation_function in fields_to_validate.items():

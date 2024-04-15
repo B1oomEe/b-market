@@ -1,15 +1,15 @@
 from flask import Blueprint, make_response, render_template, session, request, redirect, url_for
 from sqlalchemy.exc import SQLAlchemyError
 
-from .. import auth, database, login_manager
+from .. import auth, database # , login_manager
 from ..utils.graphicMaker import ReportEmailSender
 
 essentialController = Blueprint('essentialController', __name__)
 
-@login_manager.user_loader
-def load_user(user_id):
-	# Here needs to implement code that loads the user from your database by user_id
-	return user_id
+# @login_manager.user_loader
+# def load_user(user_id):
+# 	# Here needs to implement code that loads the user from your database by user_id
+# 	return user_id
 
 @essentialController.errorhandler(404)
 def pageNotFound(error):
@@ -31,7 +31,7 @@ def homePage():
 @essentialController.route('/lookforinvestor', methods=['GET'])
 @auth.tokenRequired
 def lookforinvestorPage():
-	dataFromDataBase = database.getCardsByRandomWithTarget('Investment')
+	dataFromDataBase = database.getCardsByRandomWithTarget('Инвестирование')
 	if dataFromDataBase == None: dataFromDataBase = []
 	return render_template('lookForInvestments.html', cards=dataFromDataBase)
 
@@ -56,7 +56,8 @@ def getEmailInfo():
 def toLike():
 	cardID = request.form.get('argument')
 	dataFromDataBase = database.getUserDataByField("uid", session.get('userID'))
-	print(dataFromDataBase.bookmarks)
+	cardInDataBase = database.getCardByCID(cardID)
+	database.updateCardData(cardID, {"bookmarks_count": cardInDataBase.bookmarks_count + 1})
 	if dataFromDataBase.bookmarks is None:
 		newCards = [cardID]
 	else:
