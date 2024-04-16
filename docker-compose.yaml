@@ -1,1 +1,43 @@
-version: 3.0
+version: "3.9"
+services: 
+  app: 
+    build: .
+    image: b-market
+    restart: always
+    ports: 
+     - '5000:5000'
+    depends_on:
+      - postgres
+    networks:
+      - b-market
+
+  postgres:
+    image: postgres:14.8-alpine3.18
+    environment:
+      POSTGRES_DB: "postgres"
+      POSTGRES_USER: "root"
+      POSTGRES_PASSWORD: "root"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+    # - ./initdb:/docker-entrypoint-initdb.d
+      - b-market:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U root -d prod-olymp" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+    networks:
+      - b-market
+
+
+volumes:
+  b-market:
+
+networks:
+  b-market:
+    name: b-market
+    driver: bridge
