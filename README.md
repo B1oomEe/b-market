@@ -49,6 +49,11 @@ This is complete guidence for setting up project for developing
 3. Go to source dir
 4. Run `server.py`
 
+### 3rd prod method:
+1. Clone git repo
+2. Run `docker compose up -build`
+3. Enjoy
+
 ## **How to autotest:**
 + This will be soon updated, once we hit all tests
 ## **Error handling:**
